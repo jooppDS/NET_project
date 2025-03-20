@@ -34,7 +34,7 @@ class Smartwatch : Device, IPowerNotifier
     }
 
     public string getFileFormat() {
-        return manType + ',' + base.getFileFormat() + Power + '%';
+        return manType + ',' + base.getFileFormat() + ',' +Power + '%';
     }
     
     public override string ToString()

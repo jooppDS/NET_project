@@ -32,7 +32,7 @@ public abstract class Device
     }
 
     public string getFileFormat() {
-        return Name + ',' + Active + ',';
+        return Name + ',' + Active;
     }
 
     public override string ToString() {

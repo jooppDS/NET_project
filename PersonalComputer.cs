@@ -40,7 +40,9 @@ class PersonalComputer : Device
     }
     
     public string getFileFormat() {
-        return manType + ',' + base.getFileFormat() + _os;
+        if(_os == null)
+            return  manType + ',' + base.getFileFormat();
+        return manType + ',' + base.getFileFormat() +',' +_os;
     }
 
     public override string ToString()

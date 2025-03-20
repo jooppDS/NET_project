@@ -15,13 +15,14 @@ class EmbededDevice : Device
         try
         {
             _ip = ip;
+            _networkname = networkname;
         }
-        catch (ArgumentException ex)
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
 
-        this.networkName = networkname;
+        
     }
 
 
@@ -54,7 +55,14 @@ class EmbededDevice : Device
     public string _networkname
     {
         get { return networkName; }
-        set { networkName = value; }
+        set
+        {
+            Regex rg = new Regex("MD Ltd.");
+            if(rg.IsMatch(value))
+                networkName = value;
+            else
+                throw new ConnectionException();
+        }
     }
 
     public string _ip {
@@ -70,7 +78,7 @@ class EmbededDevice : Device
     }
     public string getFileFormat()
     {
-        return manType + ',' + base.getFileFormat() + Ip + ',' + networkName;
+        return manType + ',' + _name + ',' + Ip + ',' + networkName;
     }
     
     public override string ToString()

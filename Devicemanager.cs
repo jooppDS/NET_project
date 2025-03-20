@@ -183,6 +183,10 @@ public class Devicemanager {
 
     public void saveStorage(string filename)
     {
+
+        if(File.Exists(filename))
+            File.Delete(filename);
+        
         foreach (Device device in deviceStorage)
         {
             
