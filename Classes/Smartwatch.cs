@@ -8,24 +8,40 @@ class Smartwatch : Device, IPowerNotifier
     
     long Power;
 
-    public Smartwatch(long id, string name, bool active, long power) : base(id, name, active) {
+    public Smartwatch(string id, string name, bool active, long power) : base(id, name, active) {
         Power = power >= 0 & power <= 100 ? power : 0;
     }
 
 
-    public bool PowerOn() {
+    public override bool PowerOn() {
         bool success = Power > 11 ? true : false;
         if (success)
             Power -= 10;
         else
+        {
+            Notify();
             throw new EmptyBatteryException();
+        }
+
         _active = success;
         return success;
     }
 
-    public void PowerOff() {
-        _active = false;
+    public override bool Edit(Device otherDevice)
+    {
+        if (otherDevice is not Smartwatch newWatch)
+            throw new ArgumentException();
+
+        _id = newWatch._id;
+        _name = newWatch._name;
+        _active = newWatch._active;
+        _power = newWatch._power;
+
+
+        return true;
     }
+
+
 
     public long _power
     {
@@ -33,12 +49,17 @@ class Smartwatch : Device, IPowerNotifier
         set { Power = value; }
     }
 
-    public string getFileFormat() {
+    public override string getFileFormat() {
         return manType + ',' + base.getFileFormat() + ',' +Power + '%';
     }
     
     public override string ToString()
     {
         return base.ToString() + "Power: " + Power + "\n";
+    }
+    
+
+    public void Notify() {
+       Console.WriteLine("Energy is low"); 
     }
 }

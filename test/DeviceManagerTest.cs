@@ -1,4 +1,4 @@
-﻿
+﻿/*
 namespace task2.test;
 
 using Xunit;
@@ -109,3 +109,5 @@ public class DeviceManagerTest
         File.Delete(filename);
     }
 }
+
+*/

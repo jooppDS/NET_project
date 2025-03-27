@@ -8,16 +8,16 @@ class PersonalComputer : Device
     private const string manType = "P";
     private string OS = null;
 
-    public PersonalComputer(long id, string name, bool active, string os) : base(id, name, active)
+    public PersonalComputer(string id, string name, bool active, string os) : base(id, name, active)
     {
         OS = os;
     }
 
-    public PersonalComputer(long id, string name, bool active) : base(id, name, active) {
+    public PersonalComputer(string id, string name, bool active) : base(id, name, active) {
         
     }
 
-    public bool PowerOn()
+    public override bool PowerOn()
     {
         bool success = OS != null;
         if (!success)
@@ -29,9 +29,20 @@ class PersonalComputer : Device
         return success;
     }
 
-    public void powerOff() {
-        _active = false;
+    public override bool Edit(Device otherDevice)
+    {
+        if (otherDevice is not PersonalComputer newComputer)
+            throw new ArgumentException();
+
+        _id = newComputer._id;
+        _name = newComputer._name;
+        _active = newComputer._active;
+        _os = newComputer._os;
+
+
+        return true;
     }
+
 
     public string _os
     {
@@ -39,7 +50,7 @@ class PersonalComputer : Device
         set { OS = value; }
     }
     
-    public string getFileFormat() {
+    public override string getFileFormat() {
         if(_os == null)
             return  manType + ',' + base.getFileFormat();
         return manType + ',' + base.getFileFormat() +',' +_os;

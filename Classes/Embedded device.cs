@@ -10,7 +10,7 @@ class EmbededDevice : Device
     private string Ip;
     private string networkName;
 
-    public EmbededDevice(long id, string name, bool active, string ip, string networkname) : base(id, name, active)
+    public EmbededDevice(string id, string name, bool active, string ip, string networkname) : base(id, name, active)
     {
         try
         {
@@ -34,7 +34,7 @@ class EmbededDevice : Device
             throw new ConnectionException();
     }
 
-    public bool PowerOn() {
+    public override bool PowerOn() {
         try
         {
             Connect();
@@ -48,9 +48,21 @@ class EmbededDevice : Device
         return _active;
     }
 
-    public void PowerOff() {
-        _active = false;
+    public override bool Edit(Device otherDevice)
+    {
+        if (otherDevice is not EmbededDevice newED)
+            throw new ArgumentException();
+
+        _id = newED._id;
+        _name = newED._name;
+        _active = newED._active;
+        _ip = newED._ip;
+        _networkname = newED._networkname;
+
+
+        return true;
     }
+
 
     public string _networkname
     {
@@ -76,7 +88,7 @@ class EmbededDevice : Device
                     throw new ArgumentException();
         }
     }
-    public string getFileFormat()
+    public override string getFileFormat()
     {
         return manType + ',' + _name + ',' + Ip + ',' + networkName;
     }

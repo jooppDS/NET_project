@@ -4,10 +4,10 @@ namespace task2;
 
 public abstract class Device
 {
-    private long Id { set; get; }
+    private string Id { set; get; }
     private string Name { set; get; }
     private bool Active;
-    protected Device(long id, string name, bool active) {
+    protected Device(string id, string name, bool active) {
         Id = id;
         Name = name;
         Active = active;
@@ -19,7 +19,7 @@ public abstract class Device
         set { Name = value; }
     }
 
-    public long _id
+    public string _id
     {
         get { return Id; }
         set { Id = value; }
@@ -31,10 +31,22 @@ public abstract class Device
         set { Active = value; }
     }
 
-    public string getFileFormat() {
+    public virtual string getFileFormat() {
         return Name + ',' + Active;
     }
 
+    public virtual bool PowerOff() {
+        _active = false;
+        return true;
+    }
+
+    public virtual bool PowerOn() {
+        _active = true;
+        return true;
+    }
+    
+    public abstract bool Edit(Device otherDevice);
+    
     public override string ToString() {
         return "ID: " + Id + "\nName: " + Name + "\nActive: " + Active + "\n";
     }
