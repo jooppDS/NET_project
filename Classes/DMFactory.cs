@@ -1,9 +1,18 @@
-namespace task2;
-
-public class DMFactory
+namespace task2
 {
-    public DeviceManager CreateDM(String path)
+    /// <summary>
+    /// A factory class for creating <see cref="DeviceManager"/> instances.
+    /// </summary>
+    public class DMFactory
     {
-        return new DeviceManager(path);
+        /// <summary>
+        /// Creates a new <see cref="DeviceManager"/> using the provided file path.
+        /// </summary>
+        /// <param name="path">The file path containing device data.</param>
+        /// <returns>A new <see cref="DeviceManager"/> instance.</returns>
+        public DeviceManager CreateDM(string path)
+        {
+            return new DeviceManager(path);
+        }
     }
 }
