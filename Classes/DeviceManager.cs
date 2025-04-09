@@ -10,7 +10,7 @@ namespace task2
     public class DeviceManager : IDeviceManager, IDeviceController
     {
         
-        private List<Device> deviceStorage = new List<Device>();
+        private static List<Device> deviceStorage = new List<Device>();
 
        
         private IFileManager fileManager;

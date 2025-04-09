@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "YCpMjNCng7wxo9rMJhjQOgFKev8TFkZv43iT8JVXXP4=",
+  "Source": "DeviceManagerRest",
+  "BasePath": "_content/DeviceManagerRest",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
